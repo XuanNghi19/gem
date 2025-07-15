@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div>
+      <button class="button--medium" onclick="showAddUser()">Thêm người dùng</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>AGE</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+
+    <form id="addUserForm">
+      <label for="id">ID:</label>
+      <input type="number" name="id" required/>
+
+      <label for="name">NAME:</label>
+      <input type="text" name="name" required />
+
+      <label for="age">AGE:</label>
+      <input type="number" name="age" required />
+
+      <button onclick="addUser()">Thêm</button>
+    </form>
+
+    <form id="editUserForm">
+      <label for="id">ID:</label>
+      <input type="number" name="id" required readonly />
+
+      <label for="name">NAME:</label>
+      <input type="text" name="name" required />
+
+      <label for="age">AGE:</label>
+      <input type="number" name="age" required />
+
+      <button onclick="editUser()">Sửa</button>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>

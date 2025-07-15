@@ -1,0 +1,120 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form">
+  <div *ngFor="let field of sortedFields" class="dynamic-form__group">
+    <!-- text input -->
+    <div
+      *ngIf="
+        field.type === 'text' ||
+        field.type === 'email' ||
+        field.type === 'password'
+      "
+      class="dynamic-form__field-container"
+    >
+      <label [for]="field.key" class="dynamic-form__label">
+        {{ field.key }}
+        <span *ngIf="field.required" class="dynamic-form__required">*</span>
+      </label>
+      <input
+        [id]="field.key"
+        [formControlName]="field.key"
+        [type]="field.type"
+        [placeholder]="field.placeholder || ''"
+        class="dynamic-form__control"
+        [class.dynamic-form__control--error]="hasError(field.key)"
+      />
+
+      <div *ngIf="hasError(field.key)" class="dynamic-form__message--error">
+        {{ getErrorMessage(field.key) }}
+      </div>
+    </div>
+
+    <!-- number input  -->
+    <div *ngIf="field.type === 'number'" class="dynamic-form__field-container">
+      <label [for]="field.key" class="dynamic-form__label">
+        {{ field.key }}
+        <span *ngIf="field.required" class="dynamic-form__required">*</span>
+      </label>
+      <input
+        [id]="field.key"
+        [formControlName]="field.key"
+        type="number"
+        [placeholder]="field.placeholder"
+        class="dynamic-form__control"
+        [class.dynamic-form__control--error]="hasError(field.key)"
+      />
+
+      <div *ngIf="hasError(field.key)" class="dynamic-form__message--error">
+        {{ getErrorMessage(field.key) }}
+      </div>
+    </div>
+
+    <!-- select-dropdown  -->
+    <div *ngIf="field.type === 'select'" class="dynamic-form__field-container">
+      <label [for]="field.key" class="dynamic-form__label">
+        {{ field.key }}
+        <span *ngIf="field.required" class="dynamic-form__required">*</span>
+      </label>
+
+      <select
+        [id]="field.key"
+        [formControlName]="field.key"
+        class="dynamic-form__control"
+        [class.dynamic-form__control--error]="hasError(field.key)"
+      >
+        <option value="">-- Chọn {{ field.label }} --</option>
+        <option *ngFor="let option of field.options" [value]="option.key">
+          {{ option.value }}
+        </option>
+      </select>
+
+      <div *ngIf="hasError(field.key)" class="dynamic-form__message--error">
+        {{ getErrorMessage(field.key) }}
+      </div>
+    </div>
+
+    <!-- checkbox -->
+    <div
+      *ngIf="field.type === 'checkbox'"
+      class="dynamic-form__field-container dynamic-form__checkbox-container"
+    >
+      <label [for]="field.key" class="dynamic-form__checkbox-label">
+        {{ field.label }}
+        <input
+          [id]="field.key"
+          [formControlName]="field.key"
+          type="checkbox"
+          class="dynamic-form__checkbox"
+        />
+      </label>
+    </div>
+
+    <!-- textarea  -->
+    <div
+      *ngIf="field.type === 'textarea'"
+      class="dynamic-form__field-container"
+    >
+      <label [for]="field.key" class="dynamic-form__label">
+        {{ field.label }}
+        <span *ngIf="field.required" class="dynamic-form__required">*</span>
+      </label>
+
+      <textarea
+        [value]="field.value || ''"
+        [id]="field.key"
+        [formControlName]="field.key"
+        class="dynamic-form__control"
+        [placeholder]="field.placeholder"
+        [class.dynamic-form__control--error]="hasError(field.key)"
+        rows="4"
+      ></textarea>
+      <div *ngIf="hasError(field.key)" class="dynamic-form__message--error">
+        {{ getErrorMessage(field.key) }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isForm" class="dynamic-form__actions">
+    <button type="submit" class="dynamic-form__btn dynamic-form__btn--primary">
+      {{ submitText }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Dynamic Form Demo</h1>
+
+  <app-dynamic-form
+    [fields]="formFields"
+    [isForm]="true"
+    [submitText]="'Login'"
+    (formSubmit)="onFormSubmit($event)"
+  >
+  </app-dynamic-form>
+
+  <div *ngIf="submittedData" class="result">
+    <h3>Dữ liệu đã gửi:</h3>
+    <pre>{{ submittedData | json }}</pre>
+  </div>
+</div>

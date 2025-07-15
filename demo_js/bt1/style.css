@@ -1,0 +1,66 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+tr,
+td {
+  border: 1px solid #c4c4c4;
+  padding: 10px;
+}
+
+td {
+  text-align: center;
+  gap: 10px;
+}
+
+#addUserForm {
+  padding: 20px 70px 20px 50px;
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #cac9c8;
+  border-radius: 10px;
+}
+
+#editUserForm {
+  padding: 20px 70px 20px 50px;
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fcf8ef;
+  border-radius: 10px;
+}
+
+label {
+  margin-top: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+form button {
+  margin-top: 20px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+}
+
+.button--medium {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+}
