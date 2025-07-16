@@ -23,17 +23,8 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if(this.form.valid) {
-      this.formSubmit.emit(this.form.value);
-    } else {
-      this.markAllFieldsAsTouched();
-    }
-  }
-
-  markAllFieldsAsTouched(): void {
-    Object.keys(this.form.controls).forEach((key) => {
-      this.form.get(key)?.markAsTouched();
-    });
+    if (this.form.invalid) return this.form.markAllAsTouched();
+    this.formSubmit.emit(this.form.value);
   }
 
   // kiem tra field co loi khong
