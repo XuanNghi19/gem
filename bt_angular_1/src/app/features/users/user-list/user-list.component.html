@@ -1,0 +1,63 @@
+<div class="user-list-container">
+  <div class="header">
+    <h2>Danh sách người dùng</h2>
+    <div class="header-actions">
+      <button class="btn btn-primary" (click)="addUser()">
+        Thêm người dùng
+      </button>
+      <button class="btn btn-secondary" (click)="logout()">
+        Đăng xuất
+      </button>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+
+  <div class="user-grid" *ngIf="!isLoading && users.length > 0">
+    <div class="user-card" *ngFor="let user of users">
+      <div class="user-avatar">
+        <img [src]="user.avatar" [alt]="user.first_name + ' ' + user.last_name">
+      </div>
+      <div class="user-info">
+        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+        <p>{{ user.email }}</p>
+      </div>
+      <div class="user-actions">
+        <button class="btn btn-sm btn-info" (click)="viewUser(user.id!)">
+          Xem
+        </button>
+        <button class="btn btn-sm btn-warning" (click)="editUser(user.id!)">
+          Sửa
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id!)">
+          Xóa
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button 
+      class="btn btn-outline-primary"
+      [disabled]="currPage === 1"
+      (click)="onPageChange(currPage - 1)"
+    >
+      Trước
+    </button>
+    
+    <span class="page-info">
+      Trang {{ currPage }} / {{ totalPages }}
+    </span>
+    
+    <button 
+      class="btn btn-outline-primary"
+      [disabled]="currPage === totalPages"
+      (click)="onPageChange(currPage + 1)"
+    >
+      Sau
+    </button>
+  </div>
+</div>

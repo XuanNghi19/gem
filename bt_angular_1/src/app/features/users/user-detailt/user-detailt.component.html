@@ -1,0 +1,29 @@
+<div class="user-detail-container">
+  <div class="header">
+    <h2>Chi tiết người dùng</h2>
+    <div class="header-actions">
+      <button class="btn btn-warning" (click)="editUser()" *ngIf="user">
+        Sửa
+      </button>
+      <button class="btn btn-secondary" (click)="goBack()">
+        Quay lại
+      </button>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+
+  <div class="user-detail-card" *ngIf="!isLoading && user">
+    <div class="user-avatar-large">
+      <img [src]="user.avatar" [alt]="user.first_name + ' ' + user.last_name">
+    </div>
+    <div class="user-info-detail">
+      <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+      <p class="user-email">{{ user.email }}</p>
+      <p class="user-id">ID: {{ user.id }}</p>
+    </div>
+  </div>
+</div>

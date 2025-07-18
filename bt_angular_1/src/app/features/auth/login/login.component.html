@@ -1,0 +1,9 @@
+<div class="card">
+  <app-dynamic-form
+    [fields]="formFields"
+    [isForm]="true"
+    [submitText]="'Login'"
+    (formSubmit)="onSubmit($event)"
+  ></app-dynamic-form>
+</div>
+<app-overlay-loading [loading]="isLoading"></app-overlay-loading>

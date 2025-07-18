@@ -10,7 +10,7 @@
       class="dynamic-form__field-container"
     >
       <label [for]="field.key" class="dynamic-form__label">
-        {{ field.label }}
+        {{ field.key | capitalize}}
         <span *ngIf="field.required" class="dynamic-form__required">*</span>
       </label>
       <input
@@ -30,7 +30,7 @@
     <!-- number input  -->
     <div *ngIf="field.type === 'number'" class="dynamic-form__field-container">
       <label [for]="field.key" class="dynamic-form__label">
-        {{ field.label }}
+        {{ field.key | capitalize }}
         <span *ngIf="field.required" class="dynamic-form__required">*</span>
       </label>
       <input
@@ -50,7 +50,7 @@
     <!-- select-dropdown  -->
     <div *ngIf="field.type === 'select'" class="dynamic-form__field-container">
       <label [for]="field.key" class="dynamic-form__label">
-        {{ field.label }}
+        {{ field.key | capitalize}}
         <span *ngIf="field.required" class="dynamic-form__required">*</span>
       </label>
 
@@ -77,7 +77,7 @@
       class="dynamic-form__field-container dynamic-form__checkbox-container"
     >
       <label [for]="field.key" class="dynamic-form__checkbox-label">
-        {{ field.label }}
+        {{ field.label | capitalize }}
         <input
           [id]="field.key"
           [formControlName]="field.key"
@@ -93,7 +93,7 @@
       class="dynamic-form__field-container"
     >
       <label [for]="field.key" class="dynamic-form__label">
-        {{ field.label }}
+        {{ field.label | capitalize }}
         <span *ngIf="field.required" class="dynamic-form__required">*</span>
       </label>
 
