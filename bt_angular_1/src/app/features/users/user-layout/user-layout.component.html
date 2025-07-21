@@ -1,0 +1,4 @@
+<ng-container *ngIf="loadingService.loading$ | async as loading">
+  <app-overlay-loading [loading]="loading"></app-overlay-loading>
+</ng-container>
+<router-outlet></router-outlet>

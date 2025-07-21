@@ -3,16 +3,11 @@
     <h2>{{ isEditMode ? "Sửa" : "Thêm" }} người dùng</h2>
     <button class="btn btn-secondary" (click)="onCancel()">Quay lại</button>
   </div>
-
-  <div class="loading" *ngIf="isLoading">
-    <div class="spinner"></div>
-    <p>Đang tải dữ liệu...</p>
-  </div>
-
   <app-dynamic-form
+    [fieldData]="formData"
     [fields]="formFields"
     [isForm]="true"
-    [submitText]="'Login'"
+    [submitText]="'Sửa người dùng'"
     (formSubmit)="onSubmit($event)"
   ></app-dynamic-form>
 </div>

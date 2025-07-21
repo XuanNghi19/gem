@@ -125,14 +125,12 @@ export class DynamicFormService {
     ];
   }
 
-  getFormUser(user: User | null): FormField[] {
-    console.log(user);
+  getFormUser(): FormField[] {
     return [
       {
         key: 'email',
         label: 'Email',
         type: 'email',
-        value: user?.email,
         required: true,
         placeholder: 'Vui lòng nhập email',
         order: 1,
@@ -141,7 +139,6 @@ export class DynamicFormService {
         key: 'first_name',
         label: 'Tên',
         type: 'text',
-        value: user?.first_name,
         required: true,
         placeholder: 'Vui lòng nhập tên',
         order: 2,
@@ -150,7 +147,6 @@ export class DynamicFormService {
         key: 'last_name',
         label: 'Họ',
         type: 'text',
-        value: user?.last_name,
         required: true,
         placeholder: 'Vui lòng nhập họ',
         order: 3,

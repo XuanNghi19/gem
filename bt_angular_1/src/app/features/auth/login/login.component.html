@@ -1,3 +1,4 @@
+<app-overlay-loading [loading]="loadingService.loading$ | async"></app-overlay-loading>
 <div class="card">
   <app-dynamic-form
     [fields]="formFields"
@@ -6,4 +7,3 @@
     (formSubmit)="onSubmit($event)"
   ></app-dynamic-form>
 </div>
-<app-overlay-loading [loading]="isLoading"></app-overlay-loading>

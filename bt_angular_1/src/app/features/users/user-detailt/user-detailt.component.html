@@ -11,12 +11,7 @@
     </div>
   </div>
 
-  <div class="loading" *ngIf="isLoading">
-    <div class="spinner"></div>
-    <p>Đang tải dữ liệu...</p>
-  </div>
-
-  <div class="user-detail-card" *ngIf="!isLoading && user">
+  <div class="user-detail-card" *ngIf="!(loadingService.loading$ | async) && user">
     <div class="user-avatar-large">
       <img [src]="user.avatar" [alt]="user.first_name + ' ' + user.last_name">
     </div>

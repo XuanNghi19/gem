@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/core/models/user.model';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -10,12 +11,12 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class UserDetailtComponent implements OnInit {
   user?: User;
-  isLoading = false;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -24,17 +25,16 @@ export class UserDetailtComponent implements OnInit {
 
   private loadUser(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.isLoading = true;
+    this.loadingService.show();
 
     this.userService.getUser(id).subscribe({
       next: (response) => {
         this.user = response.data;
-        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading user:', error);
-        this.isLoading = false;
       },
+      complete: () => this.loadingService.hide()
     });
   }
 

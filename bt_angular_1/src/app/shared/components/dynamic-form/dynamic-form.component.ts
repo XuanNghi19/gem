@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormField } from 'src/app/core/models/form-configuration.model';
 import { DynamicFormService } from 'src/app/core/services/dynamic-form.service';
@@ -7,9 +7,11 @@ import { DynamicFormService } from 'src/app/core/services/dynamic-form.service';
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
   @Input() fields: FormField[] = [];
+  @Input() fieldData: any[] = [];
   @Input() submitText: string = 'Send';
   @Input() isForm: boolean = false;
   @Output() formSubmit = new EventEmitter<any>();
@@ -18,9 +20,18 @@ export class DynamicFormComponent implements OnInit {
 
   constructor(private dynamicFormService: DynamicFormService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!!changes['fieldData']) {
+      this.form.patchValue(changes['fieldData'].currentValue);
+
+    }
+  }
+
   ngOnInit(): void {
     this.form = this.dynamicFormService.createFormGroup(this.fields);
   }
+
+
 
   onSubmit(): void {
     if (this.form.invalid) return this.form.markAllAsTouched();

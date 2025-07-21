@@ -4,6 +4,7 @@ import { LoginRequest } from 'src/app/core/models/auth.model';
 import { FormField } from 'src/app/core/models/form-configuration.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DynamicFormService } from 'src/app/core/services/dynamic-form.service';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,12 @@ import { DynamicFormService } from 'src/app/core/services/dynamic-form.service';
 export class LoginComponent implements OnInit {
   formFields: FormField[] = [];
   loginRequest: any = null;
-  isLoading = false;
 
   constructor(
     private dynamicFormService: DynamicFormService,
     private router: Router,
-    private athService: AuthService
+    private athService: AuthService,
+    public loadingService: LoadingService
   ) {
     console.log('LoginComponent constructor called');
   }
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(loginRequest: LoginRequest): void {
     this.loginRequest = loginRequest;
-    this.isLoading = true;
+    this.loadingService.show();
 
     this.athService.login(this.loginRequest).subscribe({
       next: () => {
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         alert(`Đăng nhập thất bại!\nLỗi: ${err}`);
-        this.isLoading = false;
-      }
+      },
+      complete: () => this.loadingService.hide()
     });
   }
 }
